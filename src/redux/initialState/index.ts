@@ -12,6 +12,15 @@ const initialState: ReduxStore = {
   story: { data: null, loading: false, error: "" },
   comments: { data: [], loading: false, error: "" },
   comment: { data: null, loading: false, error: "" },
+  authorizationHeader: {
+    config: {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    },
+    loading: false,
+    error: "",
+  },
 };
 
 export default initialState;

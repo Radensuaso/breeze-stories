@@ -1,10 +1,12 @@
 import { Dispatch } from "redux";
-import { ReduxStore } from "../../typings/ReduxStore";
+import { AuthorizationHeader, ReduxStore } from "../../typings/ReduxStore";
 import { ERROR_ME, LOADING_ME, FILL_ME } from "./actionTypes";
 import axios from "axios";
-import { authorizationHeader } from "../../lib/authorizationHeader";
 
-export const getMeAction = (name: string) => {
+export const getMeAction = (
+  name: string,
+  config: AuthorizationHeader["config"]
+) => {
   return async (dispatch: Dispatch, getState: () => ReduxStore) => {
     try {
       dispatch({
@@ -17,7 +19,7 @@ export const getMeAction = (name: string) => {
       });
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/authors?name=${name}`,
-        authorizationHeader
+        config
       );
 
       if (response.status === 200) {
