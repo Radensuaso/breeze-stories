@@ -38,6 +38,12 @@ export interface SingleComment {
   error: string;
 }
 
+export interface AccessToken {
+  data: string;
+  loading: boolean;
+  error: string;
+}
+
 export interface ReduxStore {
   me: SingleAuthor;
   authors: Authors;
@@ -50,4 +56,5 @@ export interface ReduxStore {
   story: SingleStory;
   comments: Comments;
   comment: SingleComment;
+  accessToken: AccessToken;
 }
