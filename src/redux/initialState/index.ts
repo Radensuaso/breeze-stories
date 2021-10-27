@@ -12,7 +12,6 @@ const initialState: ReduxStore = {
   story: { data: null, loading: false, error: "" },
   comments: { data: [], loading: false, error: "" },
   comment: { data: null, loading: false, error: "" },
-  accessToken: { data: "", loading: false, error: "" },
 };
 
 export default initialState;
