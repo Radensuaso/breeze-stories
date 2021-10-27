@@ -1,17 +1,17 @@
 import { Dispatch } from "redux";
 import { ReduxStore } from "../../typings/ReduxStore";
-import { ERROR, LOADING, FILL_AUTHORS } from "./actionTypes";
+import { ERROR_AUTHORS, LOADING_AUTHORS, FILL_AUTHORS } from "./actionTypes";
 import axios from "axios";
 
 export const getAuthorsAction = (name: string) => {
   return async (dispatch: Dispatch, getState: () => ReduxStore) => {
     try {
       dispatch({
-        type: ERROR,
+        type: ERROR_AUTHORS,
         payload: "",
       });
       dispatch({
-        type: LOADING,
+        type: LOADING_AUTHORS,
         payload: true,
       });
       const response = await axios.get(
@@ -24,26 +24,26 @@ export const getAuthorsAction = (name: string) => {
           payload: response.data,
         });
         dispatch({
-          type: LOADING,
+          type: LOADING_AUTHORS,
           payload: false,
         });
       } else {
         dispatch({
-          type: ERROR,
+          type: ERROR_AUTHORS,
           payload: response.data.message,
         });
         dispatch({
-          type: LOADING,
+          type: LOADING_AUTHORS,
           payload: false,
         });
       }
     } catch (error: any) {
       dispatch({
-        type: ERROR,
+        type: ERROR_AUTHORS,
         payload: error.message,
       });
       dispatch({
-        type: LOADING,
+        type: LOADING_AUTHORS,
         payload: false,
       });
     }

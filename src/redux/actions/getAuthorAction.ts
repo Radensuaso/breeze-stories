@@ -1,51 +1,49 @@
 import { Dispatch } from "redux";
 import { ReduxStore } from "../../typings/ReduxStore";
-import { ERROR_ME, LOADING_ME, FILL_ME } from "./actionTypes";
+import { ERROR_AUTHOR, LOADING_AUTHOR, FILL_AUTHOR } from "./actionTypes";
 import axios from "axios";
-import { authorizationHeader } from "../../lib/authorizationHeader";
 
-export const getMeAction = (name: string) => {
+export const getAuthorAction = (name: string) => {
   return async (dispatch: Dispatch, getState: () => ReduxStore) => {
     try {
       dispatch({
-        type: ERROR_ME,
+        type: ERROR_AUTHOR,
         payload: "",
       });
       dispatch({
-        type: LOADING_ME,
+        type: LOADING_AUTHOR,
         payload: true,
       });
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/authors?name=${name}`,
-        authorizationHeader
+        `${process.env.REACT_APP_API_URL}/authors?name=${name}`
       );
 
       if (response.status === 200) {
         dispatch({
-          type: FILL_ME,
+          type: FILL_AUTHOR,
           payload: response.data,
         });
         dispatch({
-          type: LOADING_ME,
+          type: LOADING_AUTHOR,
           payload: false,
         });
       } else {
         dispatch({
-          type: ERROR_ME,
+          type: ERROR_AUTHOR,
           payload: response.data.message,
         });
         dispatch({
-          type: LOADING_ME,
+          type: LOADING_AUTHOR,
           payload: false,
         });
       }
     } catch (error: any) {
       dispatch({
-        type: ERROR_ME,
+        type: ERROR_AUTHOR,
         payload: error.message,
       });
       dispatch({
-        type: LOADING_ME,
+        type: LOADING_AUTHOR,
         payload: false,
       });
     }

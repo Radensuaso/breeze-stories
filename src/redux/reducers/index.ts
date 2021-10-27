@@ -2,7 +2,9 @@ import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import storage from "redux-persist/lib/storage";
-import authorsReducer from "./authorsReducer";
+import { authorsReducer } from "./authorsReducer";
+import { meReducer } from "./meReducer";
+import { authorReducer } from "./authorReducer";
 
 const persistConfig = {
   key: "root",
@@ -15,7 +17,9 @@ const persistConfig = {
 };
 
 const reducer = combineReducers({
+  me: meReducer,
   authors: authorsReducer,
+  author: authorReducer,
 });
 
 const persistingReducer = persistReducer(persistConfig, reducer);

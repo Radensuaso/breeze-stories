@@ -1,20 +1,27 @@
 import { AnyAction } from "redux";
-import { FILL_ME, LOADING_ME, ERROR_ME } from "../actions/actionTypes";
+import {
+  FILL_AUTHOR,
+  LOADING_AUTHOR,
+  ERROR_AUTHOR,
+} from "../actions/actionTypes";
 import initialState from "../initialState";
 
-export const meReducer = (state = initialState.me, action: AnyAction) => {
+export const authorReducer = (
+  state = initialState.author,
+  action: AnyAction
+) => {
   switch (action.type) {
-    case FILL_ME:
+    case FILL_AUTHOR:
       return {
         ...state,
         data: action.payload,
       };
-    case LOADING_ME:
+    case LOADING_AUTHOR:
       return {
         ...state,
         loading: action.payload,
       };
-    case ERROR_ME:
+    case ERROR_AUTHOR:
       return {
         ...state,
         error: action.payload,
