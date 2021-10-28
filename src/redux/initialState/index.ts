@@ -15,7 +15,7 @@ const initialState: ReduxStore = {
   authorizationHeader: {
     config: {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        Authorization: "",
       },
     },
     loading: false,

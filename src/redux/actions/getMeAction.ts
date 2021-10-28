@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { AuthorizationHeader, ReduxStore } from "../../typings/ReduxStore";
-import { ERROR_ME, LOADING_ME, FILL_ME } from "./actionTypes";
+import { FILL_ME, LOADING_ME, ERROR_ME } from "./actionTypes";
 import axios from "axios";
 
 export const getMeAction = (config: AuthorizationHeader["config"]) => {

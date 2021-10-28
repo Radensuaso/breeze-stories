@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { ReduxStore } from "../../typings/ReduxStore";
-import { ERROR_AUTHOR, LOADING_AUTHOR, FILL_AUTHOR } from "./actionTypes";
+import { FILL_AUTHOR, LOADING_AUTHOR, ERROR_AUTHOR } from "./actionTypes";
 import axios from "axios";
 
 export const getAuthorAction = (authorId: string) => {

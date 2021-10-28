@@ -1,49 +1,54 @@
 import { Dispatch } from "redux";
 import { ReduxStore } from "../../typings/ReduxStore";
-import { FILL_AUTHORS, LOADING_AUTHORS, ERROR_AUTHORS } from "./actionTypes";
+import { FILL_STORIES, LOADING_STORIES, ERROR_STORIES } from "./actionTypes";
 import axios from "axios";
 
-export const getAuthorsAction = (name: string) => {
+export const getStoriesAction = (
+  title: string,
+  categories: string,
+  skip: string,
+  limit: string
+) => {
   return async (dispatch: Dispatch, getState: () => ReduxStore) => {
     try {
       dispatch({
-        type: ERROR_AUTHORS,
+        type: ERROR_STORIES,
         payload: "",
       });
       dispatch({
-        type: LOADING_AUTHORS,
+        type: LOADING_STORIES,
         payload: true,
       });
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/authors?name=${name}`
+        `${process.env.REACT_APP_API_URL}/stories?title=${title}&categories=${categories}&skip=${skip}&limit=${limit}`
       );
 
       if (response.status === 200) {
         dispatch({
-          type: FILL_AUTHORS,
+          type: FILL_STORIES,
           payload: response.data,
         });
         dispatch({
-          type: LOADING_AUTHORS,
+          type: LOADING_STORIES,
           payload: false,
         });
       } else {
         dispatch({
-          type: ERROR_AUTHORS,
+          type: ERROR_STORIES,
           payload: response.data.message,
         });
         dispatch({
-          type: LOADING_AUTHORS,
+          type: LOADING_STORIES,
           payload: false,
         });
       }
     } catch (error: any) {
       dispatch({
-        type: ERROR_AUTHORS,
+        type: ERROR_STORIES,
         payload: error.message,
       });
       dispatch({
-        type: LOADING_AUTHORS,
+        type: LOADING_STORIES,
         payload: false,
       });
     }

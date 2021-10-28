@@ -6,6 +6,7 @@ import { authorsReducer } from "./authorsReducer";
 import { meReducer } from "./meReducer";
 import { authorReducer } from "./authorReducer";
 import { storiesReducer } from "./storiesReducer";
+import { myStoriesReducer } from "./myStoriesReducer";
 
 const persistConfig = {
   key: "root",
@@ -22,6 +23,7 @@ const reducer = combineReducers({
   authors: authorsReducer,
   author: authorReducer,
   stories: storiesReducer,
+  myStories: myStoriesReducer,
 });
 
 const persistingReducer = persistReducer(persistConfig, reducer);
