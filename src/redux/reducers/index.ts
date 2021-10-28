@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import { authorsReducer } from "./authorsReducer";
 import { meReducer } from "./meReducer";
 import { authorReducer } from "./authorReducer";
+import { storiesReducer } from "./storiesReducer";
 
 const persistConfig = {
   key: "root",
@@ -20,6 +21,7 @@ const reducer = combineReducers({
   me: meReducer,
   authors: authorsReducer,
   author: authorReducer,
+  stories: storiesReducer,
 });
 
 const persistingReducer = persistReducer(persistConfig, reducer);

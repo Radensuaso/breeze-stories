@@ -3,10 +3,7 @@ import { AuthorizationHeader, ReduxStore } from "../../typings/ReduxStore";
 import { ERROR_ME, LOADING_ME, FILL_ME } from "./actionTypes";
 import axios from "axios";
 
-export const getMeAction = (
-  name: string,
-  config: AuthorizationHeader["config"]
-) => {
+export const getMeAction = (config: AuthorizationHeader["config"]) => {
   return async (dispatch: Dispatch, getState: () => ReduxStore) => {
     try {
       dispatch({
@@ -18,7 +15,7 @@ export const getMeAction = (
         payload: true,
       });
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/authors?name=${name}`,
+        `${process.env.REACT_APP_API_URL}/authors/me`,
         config
       );
 

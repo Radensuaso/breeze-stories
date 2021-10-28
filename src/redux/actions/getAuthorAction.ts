@@ -3,7 +3,7 @@ import { ReduxStore } from "../../typings/ReduxStore";
 import { ERROR_AUTHOR, LOADING_AUTHOR, FILL_AUTHOR } from "./actionTypes";
 import axios from "axios";
 
-export const getAuthorAction = (name: string) => {
+export const getAuthorAction = (authorId: string) => {
   return async (dispatch: Dispatch, getState: () => ReduxStore) => {
     try {
       dispatch({
@@ -15,7 +15,7 @@ export const getAuthorAction = (name: string) => {
         payload: true,
       });
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/authors?name=${name}`
+        `${process.env.REACT_APP_API_URL}/authors/${authorId}`
       );
 
       if (response.status === 200) {
