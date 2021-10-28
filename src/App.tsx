@@ -1,4 +1,5 @@
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import BreezeFooter from "./components/BreezeFooter";
 import BreezeNavBar from "./components/BreezeNavBar";
 import { Container } from "react-bootstrap";
@@ -20,12 +21,12 @@ export default function App() {
         <BreezeNavBar />
         <Container>
           <Route path="/" component={HomePage} />
-          <Route path="/register" component={RegisterPage} />
-          <Route path="/login" component={LoginPage} />
           <Route path="/me" component={MePage} />
           <Route path="/authors" component={AuthorsPage} />
-          <Route path="/random" component={RandomStoryPage} />
           <Route path="/postStory" component={PostUpdateStoryPage} />
+          <Route path="/random" component={RandomStoryPage} />
+          <Route path="/register" component={RegisterPage} />
+          <Route path="/login" component={LoginPage} />
           <Route path="/singleAuthor/:authorId" component={SingleAuthorPage} />
           <Route path="/singleStory/:storyId" component={SingleStoryPage} />
         </Container>
