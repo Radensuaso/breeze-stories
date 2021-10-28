@@ -13,6 +13,7 @@ import PostUpdateStoryPage from "./pages/PostUpdateStoryPage";
 import RandomStoryPage from "./pages/RandomStoryPage";
 import SingleAuthorPage from "./pages/SingleAuthorPage";
 import SingleStoryPage from "./pages/SingleStoryPage";
+import AboutPage from "./pages/AboutPage";
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="/login" component={LoginPage} />
           <Route path="/singleAuthor/:authorId" component={SingleAuthorPage} />
           <Route path="/singleStory/:storyId" component={SingleStoryPage} />
+          <Route path="/about" component={AboutPage} />
         </Container>
         <BreezeFooter />
       </div>

@@ -77,6 +77,14 @@ function BreezeNavBar() {
             >
               Login
             </Link>
+            <Link
+              className={
+                pathName === "/about" ? "nav-link active-page" : "nav-link"
+              }
+              to="/about"
+            >
+              About
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
