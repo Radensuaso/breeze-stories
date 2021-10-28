@@ -1,27 +1,27 @@
 import { AnyAction } from "redux";
 import {
-  FILL_STORIES,
-  LOADING_STORIES,
-  ERROR_STORIES,
+  FILL_COMMENTS,
+  LOADING_COMMENTS,
+  ERROR_COMMENTS,
 } from "../actions/actionTypes";
 import initialState from "../initialState";
 
-export const storiesReducer = (
-  state = initialState.stories,
+export const commentsReducer = (
+  state = initialState.comments,
   action: AnyAction
 ) => {
   switch (action.type) {
-    case FILL_STORIES:
+    case FILL_COMMENTS:
       return {
         ...state,
         data: action.payload,
       };
-    case LOADING_STORIES:
+    case LOADING_COMMENTS:
       return {
         ...state,
         loading: action.payload,
       };
-    case ERROR_STORIES:
+    case ERROR_COMMENTS:
       return {
         ...state,
         error: action.payload,

@@ -11,6 +11,7 @@ import { heartedStoriesReducer } from "./heartedStoriesReducer";
 import { authorStoriesReducer } from "./authorStoriesReducer";
 import { randomStoryReducer } from "./randomStoryReducer";
 import { storyReducer } from "./storyReducer";
+import { commentsReducer } from "./commentsReducer";
 
 const persistConfig = {
   key: "root",
@@ -32,6 +33,7 @@ const reducer = combineReducers({
   authorStories: authorStoriesReducer,
   randomStory: randomStoryReducer,
   story: storyReducer,
+  comments: commentsReducer,
 });
 
 const persistingReducer = persistReducer(persistConfig, reducer);

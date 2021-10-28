@@ -7,7 +7,7 @@ import {
 import initialState from "../initialState";
 
 export const randomStoryReducer = (
-  state = initialState.author,
+  state = initialState.randomStory,
   action: AnyAction
 ) => {
   switch (action.type) {

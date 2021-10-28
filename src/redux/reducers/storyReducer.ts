@@ -2,10 +2,7 @@ import { AnyAction } from "redux";
 import { FILL_STORY, LOADING_STORY, ERROR_STORY } from "../actions/actionTypes";
 import initialState from "../initialState";
 
-export const storyReducer = (
-  state = initialState.author,
-  action: AnyAction
-) => {
+export const storyReducer = (state = initialState.story, action: AnyAction) => {
   switch (action.type) {
     case FILL_STORY:
       return {

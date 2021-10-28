@@ -7,7 +7,7 @@ import {
 import initialState from "../initialState";
 
 export const heartedStoriesReducer = (
-  state = initialState.author,
+  state = initialState.heartedStories,
   action: AnyAction
 ) => {
   switch (action.type) {
