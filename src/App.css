@@ -63,3 +63,10 @@
   font-size: 1.2rem;
   font-weight: bold;
 }
+
+/*Story container*/
+
+.story-container {
+  background-color: whitesmoke;
+  border-radius: 10px;
+}
