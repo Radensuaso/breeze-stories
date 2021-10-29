@@ -6,7 +6,9 @@ export default function Hero() {
       <Image src="/breezeHero.png" fluid />
       <div className="hero-text d-flex flex-column align-items-end">
         <h1>Breeze Stories</h1>
-        <p>A place for Storytellers and readers.</p>
+        <p className="d-none d-sm-none d-md-block">
+          A place for Storytellers and readers.
+        </p>
       </div>
     </div>
   );
