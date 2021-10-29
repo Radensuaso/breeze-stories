@@ -1,8 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&display=swap");
-
+/*Globals*/
 :root {
   --brownish: #6a4f40;
   --darkBrown: #4e3e36;
+}
+
+.background-gradient {
+  background: rgb(217, 161, 4) !important;
+  background: linear-gradient(
+    153deg,
+    rgba(217, 161, 4, 1) 3%,
+    rgba(244, 227, 191, 1) 63%
+  ) !important;
 }
 
 /* Breeze Nav bar*/
@@ -11,12 +20,6 @@
   top: 0;
   right: 0;
   left: 0;
-  background: rgb(217, 161, 4);
-  background: linear-gradient(
-    153deg,
-    rgba(217, 161, 4, 1) 3%,
-    rgba(244, 227, 191, 1) 63%
-  );
   font-size: 1.2rem;
   z-index: 9;
 }

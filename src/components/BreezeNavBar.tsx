@@ -8,7 +8,7 @@ function BreezeNavBar() {
   const pathName = useLocation().pathname;
 
   return (
-    <Navbar id="breeze-navbar" expand="lg">
+    <Navbar id="breeze-navbar" className="background-gradient" expand="lg">
       <Container>
         <Link className="navbar-brand" to="/">
           <Image
