@@ -20,17 +20,25 @@ export default function App() {
     <Router>
       <div className="App">
         <BreezeNavBar />
-        <Container>
-          <Route path="/" component={HomePage} />
-          <Route path="/me" component={MePage} />
-          <Route path="/authors" component={AuthorsPage} />
-          <Route path="/postStory" component={PostUpdateStoryPage} />
-          <Route path="/random" component={RandomStoryPage} />
-          <Route path="/register" component={RegisterPage} />
-          <Route path="/login" component={LoginPage} />
-          <Route path="/singleAuthor/:authorId" component={SingleAuthorPage} />
-          <Route path="/singleStory/:storyId" component={SingleStoryPage} />
-          <Route path="/about" component={AboutPage} />
+        <Container id="main-container">
+          <Route path="/" exact component={HomePage} />
+          <Route path="/me" exact component={MePage} />
+          <Route path="/authors" exact component={AuthorsPage} />
+          <Route path="/postStory" exact component={PostUpdateStoryPage} />
+          <Route path="/random" exact component={RandomStoryPage} />
+          <Route path="/register" exact component={RegisterPage} />
+          <Route path="/login" exact component={LoginPage} />
+          <Route
+            path="/singleAuthor/:authorId"
+            exact
+            component={SingleAuthorPage}
+          />
+          <Route
+            path="/singleStory/:storyId"
+            exact
+            component={SingleStoryPage}
+          />
+          <Route path="/about" exact component={AboutPage} />
         </Container>
         <BreezeFooter />
       </div>
