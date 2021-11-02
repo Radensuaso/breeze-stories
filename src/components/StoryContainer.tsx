@@ -1,35 +1,45 @@
+import { withRouter, RouteComponentProps, useHistory } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import AuthorInfo from "./AuthorInfo";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaComments } from "react-icons/fa";
+import { Story } from "../typings/Story";
+import { format, parseISO } from "date-fns";
 
-export default function StoryContainer() {
+interface StoryContainerProps extends RouteComponentProps {
+  story: Story;
+}
+
+function StoryContainer({ story }: StoryContainerProps) {
+  const history = useHistory();
+
   return (
     <div className="story-container p-5 mb-4 d-flex flex-column align-items-center">
-      <h2 className="mb-4">Short Story</h2>
-      <h5 className="mb-4">Fantasy, Horror</h5>
+      <h2 className="mb-4">{story?.title}</h2>
+      <h5 className="mb-4">
+        {story?.categories.map((c, i) => (
+          <span key={i}>{c}, </span>
+        ))}
+      </h5>
       <div className="mb-4" style={{ maxHeight: "22rem", maxWidth: "30rem" }}>
-        <Image src="https://picsum.photos/1000/700" fluid rounded />
+        {story?.storyImage && <Image src={story?.storyImage} fluid rounded />}
       </div>
-      <div className="mb-4">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis,
-        libero, natus aut quidem exercitationem quisquam tempore laudantium quae
-        ab quibusdam maxime iure architecto dignissimos, aliquam dolor aliquid
-        eligendi sit possimus! Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Nam quidem officiis dignissimos, voluptas eligendi
-        assumenda modi reiciendis porro, quibusdam odio animi commodi. Rerum
-        ipsam ab reprehenderit nulla animi blanditiis et.
-      </div>
+      <div className="mb-4">{story?.story}</div>
       <div className="hearts-comments align-self-start mb-4">
         <span className="me-4">
           <AiOutlineHeart size={40} />
         </span>
-        <span>
+        <span onClick={() => history.push(`/singleStory/${story?._id}`)}>
           <FaComments size={40} />
         </span>
       </div>
-      <p className="align-self-end mb-4">Posted: 12/Fev/2000</p>
-      <AuthorInfo />
+      <p className="align-self-end mb-4">
+        <strong>Posted: </strong>
+        {format(parseISO(story?.createdAt), "PPpp")}
+      </p>
+      <AuthorInfo author={story?.author} />
     </div>
   );
 }
+
+export default withRouter(StoryContainer);
