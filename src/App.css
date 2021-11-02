@@ -52,8 +52,8 @@ h2 {
   margin-top: 5rem;
 }
 
-/*Login-page*/
-.login-page .login-fields {
+/*Login-Register-page*/
+.login-register-page .login-register-fields {
   margin-top: 5rem;
   border-radius: 10px;
   background-color: whitesmoke;

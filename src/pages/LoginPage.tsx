@@ -2,14 +2,14 @@ import { Row, Col, Image, Form, FloatingLabel, Button } from "react-bootstrap";
 
 export default function LoginPage() {
   return (
-    <div className="login-page mb-5">
+    <div className="login-register-page mb-5">
       <Row className="px-3 justify-content-center">
         <Col
           xs={12}
           sm={10}
           md={8}
           lg={6}
-          className="login-fields p-5 d-flex flex-column"
+          className="login-register-fields p-5 d-flex flex-column"
         >
           <Image
             className="mb-4 align-self-center"
