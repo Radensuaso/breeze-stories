@@ -5,12 +5,16 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaComments } from "react-icons/fa";
 import { Story } from "../typings/Story";
 import { format, parseISO } from "date-fns";
+import { useSelector } from "react-redux";
+import { ReduxStore } from "../typings/ReduxStore";
 
 interface StoryContainerProps extends RouteComponentProps {
   story: Story;
 }
 
 function StoryContainer({ story }: StoryContainerProps) {
+  const me = useSelector((state: ReduxStore) => state.me);
+
   const history = useHistory();
 
   return (
@@ -27,8 +31,10 @@ function StoryContainer({ story }: StoryContainerProps) {
       <div className="mb-4">{story?.story}</div>
       <div className="hearts-comments align-self-start mb-4">
         <span className="me-4">
+          <span className="me-2">{story?.hearts.length}</span>
           <AiOutlineHeart size={40} />
         </span>
+
         <span onClick={() => history.push(`/singleStory/${story?._id}`)}>
           <FaComments size={40} />
         </span>
