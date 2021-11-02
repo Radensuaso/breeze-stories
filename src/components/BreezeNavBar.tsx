@@ -60,15 +60,7 @@ function BreezeNavBar() {
               <GiRollingDices size={35} />
             </Link>
           </Nav>
-          <Nav className="me-auto">
-            <Link
-              className={
-                pathName === "/register" ? "nav-link active-page" : "nav-link"
-              }
-              to="/register"
-            >
-              Register
-            </Link>
+          <Nav className="justify-content-end">
             <Link
               className={
                 pathName === "/login" ? "nav-link active-page" : "nav-link"
@@ -76,6 +68,14 @@ function BreezeNavBar() {
               to="/login"
             >
               Login
+            </Link>
+            <Link
+              className={
+                pathName === "/register" ? "nav-link active-page" : "nav-link"
+              }
+              to="/register"
+            >
+              Register
             </Link>
             <Link
               className={
