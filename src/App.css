@@ -70,3 +70,23 @@
   background-color: whitesmoke;
   border-radius: 10px;
 }
+
+.story-container h2 {
+  font-family: "Merienda", cursive;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.story-container .hearts-comments {
+  cursor: pointer;
+}
+
+/*Author info*/
+.author-info {
+  cursor: pointer;
+}
+
+.author-info .author-name {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
