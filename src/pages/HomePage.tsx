@@ -37,13 +37,13 @@ export default function HomePage() {
         <Form onSubmit={onSearch}>
           <Row className="search-form p-4 mb-4">
             <Col xs={12} md={6} lg={8} className="mb-2">
-              <FloatingLabel
-                label="Search by title"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setTitle(e.target.value)
-                }
-              >
-                <Form.Control type="text" />
+              <FloatingLabel label="Search by title">
+                <Form.Control
+                  type="text"
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setTitle(e.target.value)
+                  }
+                />
               </FloatingLabel>
             </Col>
             <Col xs={12} md={3} lg={2} className="mb-2">

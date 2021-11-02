@@ -14,6 +14,20 @@
   ) !important;
 }
 
+h1 {
+  font-family: "Merienda", cursive !important;
+  font-weight: bold !important;
+  font-size: 4rem !important;
+  text-shadow: 2px 2px azure !important;
+}
+
+h2 {
+  font-family: "Merienda", cursive !important;
+  font-size: 2.5rem !important;
+  font-weight: bold !important;
+  text-shadow: 2px 2px gray !important;
+}
+
 /* Breeze Nav bar*/
 #breeze-navbar {
   position: fixed;
@@ -38,6 +52,13 @@
   margin-top: 5rem;
 }
 
+/*Login-page*/
+.login-page .login-fields {
+  margin-top: 5rem;
+  border-radius: 10px;
+  background-color: whitesmoke;
+}
+
 /*Hero*/
 #hero {
   margin-top: 5rem;
@@ -52,13 +73,6 @@
   color: var(--darkBrown);
 }
 
-#hero .hero-text h1 {
-  font-family: "Merienda", cursive;
-  font-weight: bold;
-  font-size: 4rem;
-  text-shadow: 2px 2px azure;
-}
-
 #hero .hero-text p {
   font-size: 1.2rem;
   font-weight: bold;
@@ -69,12 +83,6 @@
 .story-container {
   background-color: whitesmoke;
   border-radius: 10px;
-}
-
-.story-container h2 {
-  font-family: "Merienda", cursive;
-  font-size: 3rem;
-  font-weight: bold;
 }
 
 .story-container .hearts-comments {
