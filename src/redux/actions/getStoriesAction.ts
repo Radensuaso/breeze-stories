@@ -3,7 +3,7 @@ import { ReduxStore } from "../../typings/ReduxStore";
 import { FILL_STORIES, LOADING_STORIES, ERROR_STORIES } from "./actionTypes";
 import axios from "axios";
 
-export const getStoriesAction = (title: string, categories: string) => {
+export const getStoriesAction = (title: string, category: string) => {
   return async (dispatch: Dispatch, getState: () => ReduxStore) => {
     try {
       dispatch({
@@ -15,7 +15,7 @@ export const getStoriesAction = (title: string, categories: string) => {
         payload: true,
       });
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/stories?title=${title}&categories=${categories}`
+        `${process.env.REACT_APP_API_URL}/stories?title=${title}&category=${category}`
       );
 
       if (response.status === 200) {

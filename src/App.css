@@ -81,6 +81,12 @@
   cursor: pointer;
 }
 
+/*Search Form*/
+.search-form {
+  background-color: whitesmoke;
+  border-radius: 10px;
+}
+
 /*Author info*/
 .author-info {
   cursor: pointer;
