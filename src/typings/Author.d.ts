@@ -4,7 +4,7 @@ export interface Author {
   email: string;
   password: string;
   avatar: string;
-  birthDate: Date;
+  birthDate: string;
   gender: string;
   bio: string;
   refreshToken: string;

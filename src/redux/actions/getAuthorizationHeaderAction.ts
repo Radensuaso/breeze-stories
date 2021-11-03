@@ -8,7 +8,10 @@ import {
 import axios from "axios";
 import { LoginInfo } from "../../typings/LoginInfo";
 
-export const getAuthorizationHeaderAction = (loginInfo: LoginInfo) => {
+export const getAuthorizationHeaderAction = (
+  loginInfo: LoginInfo,
+  historyPush: (location: string) => void
+) => {
   return async (dispatch: Dispatch, getState: () => ReduxStore) => {
     try {
       dispatch({
@@ -33,6 +36,7 @@ export const getAuthorizationHeaderAction = (loginInfo: LoginInfo) => {
           type: LOADING_AUTHORIZATION_HEADER,
           payload: false,
         });
+        historyPush("/me");
       } else {
         dispatch({
           type: ERROR_AUTHORIZATION_HEADER,

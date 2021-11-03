@@ -49,19 +49,18 @@ h2 {
 
 /*Main container*/
 #main-container {
-  margin-top: 5rem;
+  margin-top: 10rem;
 }
 
 /*Login-Register-page*/
 .login-register-page .login-register-fields {
-  margin-top: 5rem;
   border-radius: 10px;
   background-color: whitesmoke;
 }
 
 /*Hero*/
 #hero {
-  margin-top: 5rem;
+  margin-top: -5rem;
   position: relative;
 }
 
@@ -103,4 +102,19 @@ h2 {
 .author-info .author-name {
   font-size: 1.2rem;
   font-weight: 500;
+}
+
+/*Presentation panel*/
+.presentation-panel {
+  background-color: whitesmoke;
+  border-radius: 10px;
+}
+
+.presentation-panel .info {
+  background-color: white;
+  border-radius: 10px;
+}
+
+.presentation-panel h2 {
+  font-size: 2rem !important;
 }
