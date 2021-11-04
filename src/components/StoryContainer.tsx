@@ -18,7 +18,7 @@ function StoryContainer({ story }: StoryContainerProps) {
   const history = useHistory();
 
   return (
-    <div className="story-container p-5 mb-4 d-flex flex-column align-items-center">
+    <div className="general-container story-container p-5 mb-4 d-flex flex-column align-items-center">
       <h2 className="mb-4 text-center">{story?.title}</h2>
       <h5 className="mb-4">
         {story?.categories.map((c, i) => (

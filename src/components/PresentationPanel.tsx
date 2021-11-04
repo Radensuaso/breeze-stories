@@ -8,7 +8,7 @@ interface PresentationPanelProps {
 
 export default function PresentationPanel({ author }: PresentationPanelProps) {
   return (
-    <div className="presentation-panel p-5">
+    <div className="general-container presentation-panel p-5 mb-4">
       <Row>
         <Col xs={12} md={6} className="d-flex flex-column align-items-center">
           <Image

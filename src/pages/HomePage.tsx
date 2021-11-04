@@ -35,7 +35,7 @@ export default function HomePage() {
       <Hero />
       <Container>
         <Form onSubmit={onSearch}>
-          <Row className="search-form p-4 mb-4">
+          <Row className="general-container p-4 mb-4">
             <Col xs={12} md={6} lg={8} className="mb-2">
               <FloatingLabel label="Search by title">
                 <Form.Control

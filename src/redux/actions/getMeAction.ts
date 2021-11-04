@@ -3,7 +3,10 @@ import { AuthorizationHeader, ReduxStore } from "../../typings/ReduxStore";
 import { FILL_ME, LOADING_ME, ERROR_ME } from "./actionTypes";
 import axios from "axios";
 
-export const getMeAction = (config: AuthorizationHeader["config"]) => {
+export const getMeAction = (
+  config: AuthorizationHeader["config"],
+  historyPush: (location: string) => void
+) => {
   return async (dispatch: Dispatch, getState: () => ReduxStore) => {
     try {
       dispatch({
@@ -37,6 +40,7 @@ export const getMeAction = (config: AuthorizationHeader["config"]) => {
           type: LOADING_ME,
           payload: false,
         });
+        historyPush("/login");
       }
     } catch (error: any) {
       dispatch({
@@ -47,6 +51,7 @@ export const getMeAction = (config: AuthorizationHeader["config"]) => {
         type: LOADING_ME,
         payload: false,
       });
+      historyPush("/login");
     }
   };
 };

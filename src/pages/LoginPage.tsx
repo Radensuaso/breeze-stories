@@ -42,7 +42,7 @@ export default function LoginPage() {
           sm={10}
           md={8}
           lg={6}
-          className="login-register-fields p-5 d-flex flex-column"
+          className="general-container p-5 d-flex flex-column"
         >
           <Image
             className="mb-4 align-self-center"

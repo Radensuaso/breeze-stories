@@ -28,6 +28,14 @@ h2 {
   text-shadow: 2px 2px gray !important;
 }
 
+.general-container {
+  border-radius: 10px !important;
+  background-color: whitesmoke !important;
+}
+
+.btn  {
+  color: var(--brownish) !important;
+}
 /* Breeze Nav bar*/
 #breeze-navbar {
   position: fixed;
@@ -44,18 +52,12 @@ h2 {
 
 .active-page {
   font-weight: bolder;
-  text-shadow: 3px 3px azure;
+  text-shadow: 2px 2px azure;
 }
 
 /*Main container*/
 #main-container {
   margin-top: 10rem;
-}
-
-/*Login-Register-page*/
-.login-register-page .login-register-fields {
-  border-radius: 10px;
-  background-color: whitesmoke;
 }
 
 /*Hero*/
@@ -79,19 +81,8 @@ h2 {
 
 /*Story container*/
 
-.story-container {
-  background-color: whitesmoke;
-  border-radius: 10px;
-}
-
 .story-container .hearts-comments {
   cursor: pointer;
-}
-
-/*Search Form*/
-.search-form {
-  background-color: whitesmoke;
-  border-radius: 10px;
 }
 
 /*Author info*/
@@ -105,10 +96,6 @@ h2 {
 }
 
 /*Presentation panel*/
-.presentation-panel {
-  background-color: whitesmoke;
-  border-radius: 10px;
-}
 
 .presentation-panel .info {
   background-color: white;
@@ -117,4 +104,10 @@ h2 {
 
 .presentation-panel h2 {
   font-size: 2rem !important;
+}
+
+/*My Stories*/
+
+.my-stories button {
+  font-size: 1.5rem;
 }
