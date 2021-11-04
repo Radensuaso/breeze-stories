@@ -7,8 +7,6 @@ export interface Author {
   birthDate: string;
   gender: string;
   bio: string;
-  refreshToken: string;
-  googleId: string;
   createdAt: string;
   updatedAt: string;
 }

@@ -34,7 +34,7 @@ export default function MePage() {
   }, []);
   return (
     <div>
-      {me.loading ? <Loader /> : <PresentationPanel author={me.data} />}
+      <PresentationPanel author={me.data} />
       <div className="my-stories general-container p-4 mb-4 d-flex justify-content-center">
         <ButtonGroup aria-label="Basic example">
           <Button
