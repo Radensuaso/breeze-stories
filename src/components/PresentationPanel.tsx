@@ -1,12 +1,15 @@
 import { SingleAuthor } from "../typings/ReduxStore";
-import { Row, Col, Image } from "react-bootstrap";
+import { Row, Col, Image, Button } from "react-bootstrap";
 import { format, parseISO } from "date-fns";
+import { useState } from "react";
+import EditProfileModal from "./EditProfileModal";
 
 interface PresentationPanelProps {
   author: SingleAuthor["data"];
 }
 
 export default function PresentationPanel({ author }: PresentationPanelProps) {
+  const [modalShow, setModalShow] = useState(false);
   return (
     <div className="general-container presentation-panel p-5 mb-4">
       <Row>
@@ -18,7 +21,14 @@ export default function PresentationPanel({ author }: PresentationPanelProps) {
             fluid
             style={{ maxHeight: "20rem", maxWidth: "20rem" }}
           />
-          <h2 className="text-center mb-4">{author?.name}</h2>
+          <h2 className="text-center mb-3">{author?.name}</h2>
+          <Button
+            className="background-gradient mb-4"
+            variant="outline-dark"
+            onClick={() => setModalShow(true)}
+          >
+            Edit my profile
+          </Button>
         </Col>
         <Col
           xs={12}
@@ -48,6 +58,7 @@ export default function PresentationPanel({ author }: PresentationPanelProps) {
           )}
         </Col>
       </Row>
+      <EditProfileModal show={modalShow} onHide={() => setModalShow(false)} />
     </div>
   );
 }
