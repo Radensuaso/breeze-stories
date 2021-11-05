@@ -97,7 +97,7 @@ export default function EditProfileModal(props: EditProfileModalProps) {
       bio: me?.bio ? me?.bio : "",
     });
     // eslint-disable-next-line
-  }, []);
+  }, [me?.name]);
   return (
     <Modal {...props} size="lg" aria-labelledby="edit-profile-modal" centered>
       <Modal.Header closeButton>

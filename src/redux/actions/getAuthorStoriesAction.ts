@@ -19,7 +19,7 @@ export const getAuthorStoriesAction = (authorId: string) => {
         payload: true,
       });
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/stories/authors/${authorId}`
+        `${process.env.REACT_APP_API_URL}/stories/author/${authorId}`
       );
 
       if (response.status === 200) {

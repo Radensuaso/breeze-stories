@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { ReduxStore } from "../typings/ReduxStore";
 
 interface StoryContainerProps extends RouteComponentProps {
-  story: Story;
+  story: Story | null;
 }
 
 function StoryContainer({ story }: StoryContainerProps) {
@@ -41,9 +41,9 @@ function StoryContainer({ story }: StoryContainerProps) {
       </div>
       <p className="align-self-end mb-4">
         <strong>Posted: </strong>
-        {format(parseISO(story?.createdAt), "PPpp")}
+        {format(parseISO(story?.createdAt!), "PPpp")}
       </p>
-      <AuthorInfo author={story?.author} />
+      <AuthorInfo author={story?.author!} />
     </div>
   );
 }

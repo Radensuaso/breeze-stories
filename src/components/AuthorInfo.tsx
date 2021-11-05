@@ -1,14 +1,18 @@
-import { withRouter, RouteComponentProps } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import { Author } from "../typings/Author";
+import { useHistory } from "react-router-dom";
 
-interface AuthorInfoProps extends RouteComponentProps {
+interface AuthorInfoProps {
   author: Author;
 }
 
-function AuthorInfo({ author }: AuthorInfoProps) {
+export default function AuthorInfo({ author }: AuthorInfoProps) {
+  const history = useHistory();
   return (
-    <div className="author-info d-flex align-self-end align-items-center mb-4">
+    <div
+      className="author-info d-flex align-self-end align-items-center mb-4"
+      onClick={() => history.push(`/singleAuthor/${author._id}`)}
+    >
       <div className="me-3" style={{ maxHeight: "4rem", maxWidth: "4rem" }}>
         <Image src={author?.avatar} fluid roundedCircle />
       </div>
@@ -16,5 +20,3 @@ function AuthorInfo({ author }: AuthorInfoProps) {
     </div>
   );
 }
-
-export default withRouter(AuthorInfo);

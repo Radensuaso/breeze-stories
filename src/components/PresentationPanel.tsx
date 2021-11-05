@@ -3,6 +3,7 @@ import { Row, Col, Image, Button } from "react-bootstrap";
 import { format, parseISO } from "date-fns";
 import { useState } from "react";
 import EditProfileModal from "./EditProfileModal";
+import { useLocation } from "react-router-dom";
 
 interface PresentationPanelProps {
   author: SingleAuthor["data"];
@@ -10,6 +11,8 @@ interface PresentationPanelProps {
 
 export default function PresentationPanel({ author }: PresentationPanelProps) {
   const [modalShow, setModalShow] = useState(false);
+
+  const location = useLocation();
   return (
     <div className="general-container presentation-panel p-5 mb-4">
       <Row>
@@ -22,13 +25,15 @@ export default function PresentationPanel({ author }: PresentationPanelProps) {
             style={{ maxHeight: "20rem", maxWidth: "20rem" }}
           />
           <h2 className="text-center mb-3">{author?.name}</h2>
-          <Button
-            className="background-gradient mb-4"
-            variant="outline-dark"
-            onClick={() => setModalShow(true)}
-          >
-            Edit my profile
-          </Button>
+          {location.pathname === "/me" && (
+            <Button
+              className="background-gradient mb-4"
+              variant="outline-dark"
+              onClick={() => setModalShow(true)}
+            >
+              Edit my profile
+            </Button>
+          )}
         </Col>
         <Col
           xs={12}
