@@ -1,7 +1,11 @@
-import { Modal, Button, Form, FloatingLabel } from "react-bootstrap";
-import { ChangeEvent, useState, useEffect } from "react";
+import { Modal, Button, Form, FloatingLabel, Alert } from "react-bootstrap";
+import { ChangeEvent, useState, useEffect, FormEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ReduxStore } from "../typings/ReduxStore";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+import { getMeAction } from "../redux/actions/getMeAction";
+import Loader from "./Loader";
 
 interface EditProfileModalProps {
   show: boolean;
@@ -10,7 +14,6 @@ interface EditProfileModalProps {
 
 interface ProfileDetails {
   name: string | undefined;
-  email: string | undefined;
   birthDate: string | undefined;
   gender: string | undefined;
   bio: string | undefined;
@@ -18,35 +21,89 @@ interface ProfileDetails {
 export default function EditProfileModal(props: EditProfileModalProps) {
   const [profileDetails, setProfileDetails] = useState<ProfileDetails>({
     name: "",
-    email: "",
     birthDate: "",
     gender: "",
     bio: "",
   });
-  const [avatar, setAvatar] = useState<null | FormData>(null);
+  const [avatar, setAvatar] = useState<null | FileList>(null);
+
+  const [edit, setEdit] = useState({ error: "", loading: false });
 
   const me = useSelector((state: ReduxStore) => state.me.data);
+  const config = useSelector(
+    (state: ReduxStore) => state.authorizationHeader.config
+  );
+  const configHeader = useSelector(
+    (state: ReduxStore) => state.authorizationHeader.config.headers
+  );
+
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleDetailsChange = (key: string, value: string) => {
     setProfileDetails({ ...profileDetails, [key]: value });
+  };
+
+  const handleEdit = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      setEdit({ error: "", loading: true });
+      const firstResponse = await axios.put(
+        `${process.env.REACT_APP_API_URL}/authors/me`,
+        profileDetails,
+        config
+      );
+
+      if (firstResponse.status === 200) {
+        if (avatar) {
+          let formData = new FormData();
+          formData.append("avatar", avatar[0]);
+          const secondResponse = await axios.post(
+            `${process.env.REACT_APP_API_URL}/authors/avatar`,
+            formData,
+            {
+              headers: {
+                ...configHeader,
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
+          if (secondResponse.status === 200) {
+            setEdit({ error: "", loading: false });
+            dispatch(getMeAction(config, history.push));
+            props.onHide();
+          } else {
+            setEdit({ error: firstResponse.data.message, loading: false });
+          }
+        } else {
+          setEdit({ error: "", loading: false });
+          dispatch(getMeAction(config, history.push));
+          props.onHide();
+        }
+      } else {
+        setEdit({ error: firstResponse.data.message, loading: false });
+      }
+    } catch (error: any) {
+      setEdit({ error: error.message, loading: false });
+    }
   };
 
   useEffect(() => {
     setProfileDetails({
       ...profileDetails,
       name: me?.name ? me?.name : "",
-      email: me?.email ? me?.email : "",
       birthDate: me?.birthDate ? me?.birthDate.slice(0, 10) : "",
       gender: me?.gender ? me?.gender : "",
       bio: me?.bio ? me?.bio : "",
     });
+    // eslint-disable-next-line
   }, []);
   return (
     <Modal {...props} size="lg" aria-labelledby="edit-profile-modal" centered>
       <Modal.Header closeButton>
         <Modal.Title id="edit-profile-modal">Edit my profile</Modal.Title>
       </Modal.Header>
-      <Form>
+      <Form onSubmit={handleEdit}>
         <Modal.Body>
           <FloatingLabel label="Full Name" className="mb-3">
             <Form.Control
@@ -55,16 +112,6 @@ export default function EditProfileModal(props: EditProfileModalProps) {
               value={profileDetails.name}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 handleDetailsChange("name", e.target.value)
-              }
-            />
-          </FloatingLabel>
-          <FloatingLabel label="Email" className="mb-3">
-            <Form.Control
-              type="email"
-              placeholder="Email"
-              value={profileDetails.email}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                handleDetailsChange("email", e.target.value)
               }
             />
           </FloatingLabel>
@@ -105,7 +152,12 @@ export default function EditProfileModal(props: EditProfileModalProps) {
           </FloatingLabel>
           <Form.Group>
             <Form.Label>Avatar</Form.Label>
-            <Form.Control type="file" />
+            <Form.Control
+              type="file"
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setAvatar(e.target.files)
+              }
+            />
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
@@ -116,6 +168,11 @@ export default function EditProfileModal(props: EditProfileModalProps) {
           >
             Edit
           </Button>
+          {edit.loading ? (
+            <Loader />
+          ) : (
+            edit.error && <Alert variant="danger">{edit.error}</Alert>
+          )}
         </Modal.Footer>
       </Form>
     </Modal>

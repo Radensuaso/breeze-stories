@@ -60,7 +60,9 @@ export default function MePage() {
           ) : myStories.error ? (
             <Alert variant="danger">{myStories.error}</Alert>
           ) : (
-            myStories.data.map((story, i) => <StoryContainer story={story} />)
+            myStories.data.map((story, i) => (
+              <StoryContainer key={i} story={story} />
+            ))
           )}
         </>
       ) : (
@@ -71,7 +73,7 @@ export default function MePage() {
             <Alert variant="danger">{heartedStories.error}</Alert>
           ) : (
             heartedStories.data.map((story, i) => (
-              <StoryContainer story={story} />
+              <StoryContainer key={i} story={story} />
             ))
           )}
         </>
