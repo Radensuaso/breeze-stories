@@ -1,13 +1,28 @@
-import { FloatingLabel, Form, Button } from "react-bootstrap";
+import { FloatingLabel, Form, Button, Alert } from "react-bootstrap";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { ReduxStore } from "../typings/ReduxStore";
+import { useHistory } from "react-router";
+import Loader from "../components/Loader";
 
 export default function PostUpdateStoryPage() {
+  const [submit, setSubmit] = useState({ error: "", loading: false });
   const [title, setTitle] = useState("");
   const [categories, setCategories] = useState<string[]>([]);
-  const [storyImage, setStoryImage] = useState<null | FileList>(null);
   const [story, setStory] = useState("");
+  const [storyImage, setStoryImage] = useState<null | FileList>(null);
+
+  const config = useSelector(
+    (state: ReduxStore) => state.authorizationHeader.config
+  );
+  const configHeader = useSelector(
+    (state: ReduxStore) => state.authorizationHeader.config.headers
+  );
+
+  const history = useHistory();
 
   const handleCheckBoxes = (e: ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
@@ -20,10 +35,52 @@ export default function PostUpdateStoryPage() {
     }
   };
 
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      setSubmit({ error: "", loading: true });
+      const firstResponse = await axios.post(
+        `${process.env.REACT_APP_API_URL}/stories`,
+        { title, categories, story },
+        config
+      );
+
+      if (firstResponse.status === 201) {
+        if (storyImage) {
+          let formData = new FormData();
+          formData.append("storyImage", storyImage[0]);
+          const secondResponse = await axios.post(
+            `${process.env.REACT_APP_API_URL}/stories/${firstResponse.data.story._id}/storyImage`,
+            formData,
+            {
+              headers: {
+                ...configHeader,
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
+          if (secondResponse.status === 200) {
+            setSubmit({ error: "", loading: false });
+            history.push("/");
+          } else {
+            setSubmit({ error: firstResponse.data.message, loading: false });
+          }
+        } else {
+          setSubmit({ error: "", loading: false });
+          history.push("/");
+        }
+      } else {
+        setSubmit({ error: firstResponse.data.message, loading: false });
+      }
+    } catch (error: any) {
+      setSubmit({ error: error.message, loading: false });
+    }
+  };
+
   return (
     <div className="general-container p-5">
       <h2 className="mb-4">Post a Story</h2>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <FloatingLabel label="Title" className="mb-3">
           <Form.Control
             type="text"
@@ -82,6 +139,11 @@ export default function PostUpdateStoryPage() {
           >
             Submit
           </Button>
+          {submit.loading ? (
+            <Loader />
+          ) : (
+            submit.error && <Alert variant="danger">{submit.error}</Alert>
+          )}
         </div>
       </Form>
     </div>

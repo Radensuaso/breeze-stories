@@ -7,6 +7,7 @@ import { Story } from "../typings/Story";
 import { format, parseISO } from "date-fns";
 import { useSelector } from "react-redux";
 import { ReduxStore } from "../typings/ReduxStore";
+import ReactHtmlParser from "react-html-parser";
 
 interface StoryContainerProps {
   story: Story | null;
@@ -28,7 +29,7 @@ export default function StoryContainer({ story }: StoryContainerProps) {
       <div className="mb-4" style={{ maxHeight: "22rem", maxWidth: "30rem" }}>
         {story?.storyImage && <Image src={story?.storyImage} fluid rounded />}
       </div>
-      <div className="mb-4">{story?.story}</div>
+      <div className="mb-4">{ReactHtmlParser(story?.story!)}</div>
       <div className="hearts-comments align-self-start mb-4">
         <span className="me-4">
           <span className="me-2">{story?.hearts.length}</span>
