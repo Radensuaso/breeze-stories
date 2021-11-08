@@ -1,10 +1,9 @@
-import { withRouter } from "react-router-dom";
 import { Navbar, Container, Nav, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { GiRollingDices } from "react-icons/gi";
 import { useLocation } from "react-router-dom";
 
-function BreezeNavBar() {
+export default function BreezeNavBar() {
   const pathName = useLocation().pathname;
 
   return (
@@ -91,5 +90,3 @@ function BreezeNavBar() {
     </Navbar>
   );
 }
-
-export default withRouter(BreezeNavBar);

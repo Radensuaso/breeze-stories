@@ -1,4 +1,4 @@
-import { withRouter, RouteComponentProps, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import AuthorInfo from "./AuthorInfo";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
@@ -8,11 +8,11 @@ import { format, parseISO } from "date-fns";
 import { useSelector } from "react-redux";
 import { ReduxStore } from "../typings/ReduxStore";
 
-interface StoryContainerProps extends RouteComponentProps {
+interface StoryContainerProps {
   story: Story | null;
 }
 
-function StoryContainer({ story }: StoryContainerProps) {
+export default function StoryContainer({ story }: StoryContainerProps) {
   const me = useSelector((state: ReduxStore) => state.me);
 
   const history = useHistory();
@@ -47,5 +47,3 @@ function StoryContainer({ story }: StoryContainerProps) {
     </div>
   );
 }
-
-export default withRouter(StoryContainer);

@@ -1,6 +1,6 @@
 import PresentationPanel from "../components/PresentationPanel";
 import { Alert } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ReduxStore } from "../typings/ReduxStore";
 import { useRouteMatch } from "react-router";
