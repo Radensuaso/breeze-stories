@@ -6,7 +6,7 @@ export interface Story {
   title: string;
   categories: string[];
   story: string;
-  hearts: Author[];
+  hearts: string[];
   storyImage: string;
   createdAt: string;
   updatedAt: string;

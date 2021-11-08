@@ -8,16 +8,44 @@ import { format, parseISO } from "date-fns";
 import { useSelector } from "react-redux";
 import { ReduxStore } from "../typings/ReduxStore";
 import ReactHtmlParser from "react-html-parser";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 interface StoryContainerProps {
   story: Story | null;
 }
 
 export default function StoryContainer({ story }: StoryContainerProps) {
-  const me = useSelector((state: ReduxStore) => state.me);
+  const [hearted, setHearted] = useState<boolean>(false);
+  const me = useSelector((state: ReduxStore) => state.me.data);
+  const config = useSelector(
+    (state: ReduxStore) => state.authorizationHeader.config
+  );
 
   const history = useHistory();
 
+  const handleHeart = async () => {
+    const response = await axios.post(
+      `${process.env.REACT_APP_API_URL}/stories/${story?._id}/hearts`,
+      {},
+      config
+    );
+
+    if (response.status === 200) {
+      setHearted(!hearted);
+    } else {
+      history.push("/login");
+    }
+  };
+
+  useEffect(() => {
+    story?.hearts.forEach((heartId) => {
+      if (heartId === me?._id) {
+        setHearted(true);
+      }
+    });
+    // eslint-disable-next-line
+  }, []);
   return (
     <div className="general-container story-container p-5 mb-4 d-flex flex-column align-items-center">
       <h2 className="mb-4 text-center">{story?.title}</h2>
@@ -31,9 +59,9 @@ export default function StoryContainer({ story }: StoryContainerProps) {
       </div>
       <div className="mb-4">{ReactHtmlParser(story?.story!)}</div>
       <div className="hearts-comments align-self-start mb-4">
-        <span className="me-4">
+        <span className="me-4" onClick={handleHeart}>
           <span className="me-2">{story?.hearts.length}</span>
-          <AiOutlineHeart size={40} />
+          {hearted ? <AiFillHeart size={40} /> : <AiOutlineHeart size={40} />}
         </span>
 
         <span onClick={() => history.push(`/singleStory/${story?._id}`)}>
