@@ -60,7 +60,9 @@ export default function StoryContainer({ story }: StoryContainerProps) {
       <div className="mb-4">{ReactHtmlParser(story?.story!)}</div>
       <div className="hearts-comments align-self-start mb-4">
         <span className="me-4" onClick={handleHeart}>
-          <span className="me-2">{story?.hearts.length}</span>
+          <span className="me-2">
+            {story?.hearts.length! + (hearted ? 1 : 0)}
+          </span>
           {hearted ? <AiFillHeart size={40} /> : <AiOutlineHeart size={40} />}
         </span>
 
