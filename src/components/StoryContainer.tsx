@@ -74,10 +74,12 @@ export default function StoryContainer({ story }: StoryContainerProps) {
           <FaComments size={40} />
         </span>
       </div>
-      <p className="align-self-end mb-4">
-        <strong>Posted: </strong>
-        {format(parseISO(story?.createdAt!), "PPpp")}
-      </p>
+      {story?.createdAt && (
+        <p className="align-self-end mb-4">
+          <strong>Posted: </strong>
+          {format(parseISO(story?.createdAt), "PPpp")}
+        </p>
+      )}
       <AuthorInfo author={story?.author!} />
     </div>
   );

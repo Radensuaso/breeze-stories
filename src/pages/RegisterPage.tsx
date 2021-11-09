@@ -1,6 +1,12 @@
 import { Row, Col, Image, Form, FloatingLabel, Button } from "react-bootstrap";
+import { useState } from "react";
 
 export default function RegisterPage() {
+  const [registerInfo, setRegisterInfo] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
   return (
     <div className="login-register-page mb-5">
       <Row className="px-3 justify-content-center">
@@ -37,6 +43,14 @@ export default function RegisterPage() {
               />
             </FloatingLabel>
             <FloatingLabel label="Password">
+              <Form.Control
+                className="mb-2"
+                size="lg"
+                type="password"
+                placeholder="Large text"
+              />
+            </FloatingLabel>
+            <FloatingLabel label="Repeat password">
               <Form.Control
                 className="mb-2"
                 size="lg"
