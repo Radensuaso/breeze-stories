@@ -63,7 +63,11 @@ export default function StoryContainer({ story }: StoryContainerProps) {
           <span className="me-2">
             {story?.hearts.length! + (hearted ? 1 : 0)}
           </span>
-          {hearted ? <AiFillHeart size={40} /> : <AiOutlineHeart size={40} />}
+          {hearted ? (
+            <AiFillHeart size={40} style={{ color: "red" }} />
+          ) : (
+            <AiOutlineHeart size={40} />
+          )}
         </span>
 
         <span onClick={() => history.push(`/singleStory/${story?._id}`)}>
