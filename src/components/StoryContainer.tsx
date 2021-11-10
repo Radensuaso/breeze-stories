@@ -57,12 +57,16 @@ export default function StoryContainer({ story }: StoryContainerProps) {
       <div className="mb-4" style={{ maxHeight: "22rem", maxWidth: "30rem" }}>
         {story?.storyImage && <Image src={story?.storyImage} fluid rounded />}
       </div>
-      <div className="mb-4">{ReactHtmlParser(story?.story!)}</div>
+      {story?.story && (
+        <div className="mb-4">{ReactHtmlParser(story?.story)}</div>
+      )}
       <div className="hearts-comments align-self-start mb-4">
         <span className="me-4" onClick={handleHeart}>
-          <span className="me-2">
-            {story?.hearts.length! + (hearted ? 1 : 0)}
-          </span>
+          {story?.hearts && (
+            <span className="me-2">
+              {story?.hearts.length + (hearted ? 1 : 0)}
+            </span>
+          )}
           {hearted ? (
             <AiFillHeart size={40} style={{ color: "red" }} />
           ) : (
@@ -80,7 +84,7 @@ export default function StoryContainer({ story }: StoryContainerProps) {
           {format(parseISO(story?.createdAt), "PPpp")}
         </p>
       )}
-      <AuthorInfo author={story?.author!} />
+      {story?.author && <AuthorInfo author={story?.author} />}
     </div>
   );
 }
