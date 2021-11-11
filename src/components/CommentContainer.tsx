@@ -1,5 +1,6 @@
 import { Image, Row, Col } from "react-bootstrap";
 import { Comment } from "../typings/Comment";
+import { format, parseISO } from "date-fns";
 
 interface CommentContainerProps {
   comment: Comment;
@@ -16,9 +17,12 @@ export default function CommentContainer({ comment }: CommentContainerProps) {
           roundedCircle
           fluid
         />
-        <div>
+        <div className="d-flex flex-column w-100">
           <h5>{comment?.author.name}</h5>
           <p>{comment?.comment}</p>
+          <p className="align-self-end mb-4">
+            <em>{format(parseISO(comment?.createdAt), "PPpp")}</em>
+          </p>
         </div>
       </Col>
     </Row>

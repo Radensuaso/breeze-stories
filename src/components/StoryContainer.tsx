@@ -82,8 +82,7 @@ export default function StoryContainer({ story }: StoryContainerProps) {
       </div>
       {story?.createdAt && (
         <p className="align-self-end mb-4">
-          <strong>Posted: </strong>
-          {format(parseISO(story?.createdAt), "PPpp")}
+          <em>{format(parseISO(story?.createdAt), "PPpp")}</em>
         </p>
       )}
       {story?.author && <AuthorInfo author={story?.author} />}
