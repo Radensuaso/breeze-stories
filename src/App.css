@@ -111,3 +111,9 @@ h2 {
 .my-stories button {
   font-size: 1.5rem;
 }
+
+/* comments */
+
+.comments {
+  background-color: rgb(203 222 255) !important;
+}

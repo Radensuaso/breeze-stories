@@ -6,7 +6,7 @@ export interface Comment {
   story: string;
   author: Author;
   comment: string;
-  hearts: Author[];
+  hearts: string[];
   subComments: SubComment[];
   createdAt: string;
   updatedAt: string;

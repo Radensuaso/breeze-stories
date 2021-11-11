@@ -9,17 +9,22 @@ import StoryContainer from "../components/StoryContainer";
 import { getAuthorAction } from "../redux/actions/getAuthorAction";
 import { getAuthorStoriesAction } from "../redux/actions/getAuthorStoriesAction";
 
+interface MatchParams {
+  authorId: string;
+}
+
 export default function SingleAuthorPage() {
   const author = useSelector((state: ReduxStore) => state.author);
   const authorStories = useSelector((state: ReduxStore) => state.authorStories);
 
   const dispatch = useDispatch();
 
-  const params: any = useRouteMatch().params;
+  const params = useRouteMatch<MatchParams>().params;
+  const authorId = params.authorId;
 
   useEffect(() => {
-    dispatch(getAuthorAction(params.authorId));
-    dispatch(getAuthorStoriesAction(params.authorId));
+    dispatch(getAuthorAction(authorId));
+    dispatch(getAuthorStoriesAction(authorId));
     // eslint-disable-next-line
   }, []);
   return (
