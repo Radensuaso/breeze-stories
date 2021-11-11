@@ -1,6 +1,5 @@
 import { Image, Row, Col } from "react-bootstrap";
 import { Comment } from "../typings/Comment";
-import { useState } from "react";
 
 interface CommentContainerProps {
   comment: Comment;
