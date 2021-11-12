@@ -3,6 +3,7 @@ import {
   FILL_AUTHORIZATION_HEADER,
   LOADING_AUTHORIZATION_HEADER,
   ERROR_AUTHORIZATION_HEADER,
+  LOGOUT_REQUEST,
 } from "../actions/actionTypes";
 import initialState from "../initialState";
 
@@ -19,6 +20,17 @@ export const authorizationHeaderReducer = (
           headers: {
             ...state.config.headers,
             Authorization: `Bearer ${action.payload}`,
+          },
+        },
+      };
+    case LOGOUT_REQUEST:
+      return {
+        ...state,
+        config: {
+          ...state.config,
+          headers: {
+            ...state.config.headers,
+            Authorization: "",
           },
         },
       };

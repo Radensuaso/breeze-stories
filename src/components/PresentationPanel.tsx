@@ -4,6 +4,9 @@ import { format, parseISO } from "date-fns";
 import { useState } from "react";
 import EditProfileModal from "./EditProfileModal";
 import { useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logoutAction } from "../redux/actions/logoutAction";
 
 interface PresentationPanelProps {
   author: SingleAuthor["data"];
@@ -11,6 +14,14 @@ interface PresentationPanelProps {
 
 export default function PresentationPanel({ author }: PresentationPanelProps) {
   const [modalShow, setModalShow] = useState(false);
+
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(logoutAction());
+    history.push("/login");
+  };
 
   const location = useLocation();
   return (
@@ -26,13 +37,21 @@ export default function PresentationPanel({ author }: PresentationPanelProps) {
           />
           <h2 className="text-center mb-3">{author?.name}</h2>
           {location.pathname === "/me" && (
-            <Button
-              className="background-gradient mb-4"
-              variant="outline-dark"
-              onClick={() => setModalShow(true)}
-            >
-              Edit my profile
-            </Button>
+            <div>
+              <Button
+                className="background-gradient mb-4 me-3"
+                variant="outline-dark"
+                onClick={() => setModalShow(true)}
+              >
+                Edit my profile
+              </Button>
+              <Button className="mb-4 me-3" variant="danger">
+                Delete profile
+              </Button>
+              <Button className="mb-4" variant="outline-dark" onClick={logout}>
+                Logout
+              </Button>
+            </div>
           )}
         </Col>
         <Col

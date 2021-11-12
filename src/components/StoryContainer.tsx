@@ -54,14 +54,14 @@ export default function StoryContainer({ story }: StoryContainerProps) {
           <span key={i}>{c}, </span>
         ))}
       </h5>
-      <div className="mb-4" style={{ maxHeight: "22rem", maxWidth: "30rem" }}>
-        {story?.storyImage && <Image src={story?.storyImage} fluid rounded />}
-      </div>
       {story?.story && (
         <div className="mb-4 align-self-start">
           {ReactHtmlParser(story?.story)}
         </div>
       )}
+      <div className="mb-4" style={{ maxHeight: "22rem", maxWidth: "30rem" }}>
+        {story?.storyImage && <Image src={story?.storyImage} fluid rounded />}
+      </div>
       <div className="hearts-comments align-self-start mb-4">
         <span className="me-4" onClick={handleHeart}>
           {story?.hearts && (
