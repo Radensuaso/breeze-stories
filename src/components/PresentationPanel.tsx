@@ -7,13 +7,15 @@ import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutAction } from "../redux/actions/logoutAction";
+import DeleteProfileModal from "./DeleteProfileModal";
 
 interface PresentationPanelProps {
   author: SingleAuthor["data"];
 }
 
 export default function PresentationPanel({ author }: PresentationPanelProps) {
-  const [modalShow, setModalShow] = useState(false);
+  const [editModalShow, setEditModalShow] = useState(false);
+  const [deleteProfileModalShow, setDeleteProfileModalShow] = useState(false);
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -41,11 +43,15 @@ export default function PresentationPanel({ author }: PresentationPanelProps) {
               <Button
                 className="background-gradient mb-4 me-3"
                 variant="outline-dark"
-                onClick={() => setModalShow(true)}
+                onClick={() => setEditModalShow(true)}
               >
                 Edit my profile
               </Button>
-              <Button className="mb-4 me-3" variant="danger">
+              <Button
+                className="mb-4 me-3"
+                variant="danger"
+                onClick={() => setDeleteProfileModalShow(true)}
+              >
                 Delete profile
               </Button>
               <Button className="mb-4" variant="outline-dark" onClick={logout}>
@@ -82,7 +88,14 @@ export default function PresentationPanel({ author }: PresentationPanelProps) {
           )}
         </Col>
       </Row>
-      <EditProfileModal show={modalShow} onHide={() => setModalShow(false)} />
+      <EditProfileModal
+        show={editModalShow}
+        onHide={() => setEditModalShow(false)}
+      />
+      <DeleteProfileModal
+        show={deleteProfileModalShow}
+        onHide={() => setDeleteProfileModalShow(false)}
+      />
     </div>
   );
 }

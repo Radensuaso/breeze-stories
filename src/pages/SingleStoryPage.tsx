@@ -18,6 +18,7 @@ import Loader from "../components/Loader";
 import CommentContainer from "../components/CommentContainer";
 import { useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 interface MatchParams {
   storyId: string;
@@ -39,6 +40,7 @@ export default function SingleStoryPage() {
   const params = useRouteMatch<MatchParams>().params;
   const storyId = params.storyId;
 
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const handleSubmitComment = async (e: FormEvent) => {
@@ -55,9 +57,11 @@ export default function SingleStoryPage() {
         setSubmitComment({ error: "", loading: false });
       } else {
         setSubmitComment({ error: response.data.message, loading: false });
+        history.push("/login");
       }
     } catch (error: any) {
       setSubmitComment({ error: error.message, loading: false });
+      history.push("/login");
     }
   };
 

@@ -25,15 +25,19 @@ export default function StoryContainer({ story }: StoryContainerProps) {
   const history = useHistory();
 
   const handleHeart = async () => {
-    const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}/stories/${story?._id}/hearts`,
-      {},
-      config
-    );
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/stories/${story?._id}/hearts`,
+        {},
+        config
+      );
 
-    if (response.status === 200) {
-      setHearted(!hearted);
-    } else {
+      if (response.status === 200) {
+        setHearted(!hearted);
+      } else {
+        history.push("/login");
+      }
+    } catch (error) {
       history.push("/login");
     }
   };
