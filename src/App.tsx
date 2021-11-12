@@ -1,6 +1,5 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import BreezeFooter from "./components/BreezeFooter";
 import BreezeNavBar from "./components/BreezeNavBar";
 import { Container } from "react-bootstrap";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -13,7 +12,6 @@ import PostUpdateStoryPage from "./pages/PostUpdateStoryPage";
 import RandomStoryPage from "./pages/RandomStoryPage";
 import SingleAuthorPage from "./pages/SingleAuthorPage";
 import SingleStoryPage from "./pages/SingleStoryPage";
-import AboutPage from "./pages/AboutPage";
 
 export default function App() {
   return (
@@ -38,9 +36,7 @@ export default function App() {
             exact
             component={SingleStoryPage}
           />
-          <Route path="/about" exact component={AboutPage} />
         </Container>
-        <BreezeFooter />
       </div>
     </Router>
   );
