@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import { Image } from "react-bootstrap";
+import { Image, Button } from "react-bootstrap";
 import AuthorInfo from "./AuthorInfo";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { FaComments } from "react-icons/fa";
@@ -10,12 +10,14 @@ import { ReduxStore } from "../typings/ReduxStore";
 import ReactHtmlParser from "react-html-parser";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import DeleteStoryModal from "./DeleteStoryModal";
 
 interface StoryContainerProps {
   story: Story | null;
 }
 
 export default function StoryContainer({ story }: StoryContainerProps) {
+  const [deleteStoryModalShow, setDeleteStoryModalShow] = useState(false);
   const [hearted, setHearted] = useState<boolean>(false);
   const me = useSelector((state: ReduxStore) => state.me.data);
   const config = useSelector(
@@ -50,8 +52,18 @@ export default function StoryContainer({ story }: StoryContainerProps) {
     });
     // eslint-disable-next-line
   }, [story?.hearts]);
+
   return (
     <div className="general-container story-container p-5 mb-4 d-flex flex-column align-items-center">
+      {me?._id === story?.author._id && (
+        <Button
+          variant="danger"
+          className="align-self-end"
+          onClick={() => setDeleteStoryModalShow(true)}
+        >
+          Delete Story
+        </Button>
+      )}
       <h2 className="mb-4 text-center">{story?.title}</h2>
       <h5 className="mb-4">
         {story?.categories.map((c, i) => (
@@ -90,6 +102,11 @@ export default function StoryContainer({ story }: StoryContainerProps) {
         </p>
       )}
       {story?.author && <AuthorInfo author={story?.author} />}
+      <DeleteStoryModal
+        show={deleteStoryModalShow}
+        onHide={() => setDeleteStoryModalShow(false)}
+        storyid={story?._id}
+      />
     </div>
   );
 }

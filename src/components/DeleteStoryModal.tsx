@@ -1,19 +1,23 @@
 import { Modal, Button, Alert } from "react-bootstrap";
 import axios from "axios";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { ReduxStore } from "../typings/ReduxStore";
 import { useHistory } from "react-router-dom";
-import { logoutAction } from "../redux/actions/logoutAction";
 import Loader from "./Loader";
+import { useDispatch } from "react-redux";
+import { getStoriesAction } from "../redux/actions/getStoriesAction";
+import { getMyStoriesAction } from "../redux/actions/getMyStoriesAction";
+import { getHeartedStories } from "../redux/actions/getHeartedStories";
 
-interface DeleteProfileModalProps {
+interface DeleteStoryModalProps {
   show: boolean;
   onHide: () => void;
+  storyid: string | undefined;
 }
 
-export default function DeleteProfileModal(props: DeleteProfileModalProps) {
-  const [deleteProfile, setDeleteProfile] = useState({
+export default function DeleteStoryModal(props: DeleteStoryModalProps) {
+  const [deleteStory, setDeleteStory] = useState({
     error: "",
     loading: false,
   });
@@ -22,26 +26,28 @@ export default function DeleteProfileModal(props: DeleteProfileModalProps) {
     (state: ReduxStore) => state.authorizationHeader.config
   );
 
-  const dispatch = useDispatch();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleProfileDeletion = async () => {
     try {
-      setDeleteProfile({ error: "", loading: true });
+      setDeleteStory({ error: "", loading: true });
       const response = await axios.delete(
-        `${process.env.REACT_APP_API_URL}/authors/me`,
+        `${process.env.REACT_APP_API_URL}/stories/${props.storyid}/me`,
         config
       );
       if (response.status === 200) {
-        setDeleteProfile({ error: "", loading: false });
-        history.push("/register");
-        dispatch(logoutAction());
+        setDeleteStory({ error: "", loading: false });
+        dispatch(getStoriesAction("", ""));
+        dispatch(getMyStoriesAction(config));
+        dispatch(getHeartedStories(config));
+        props.onHide();
       } else {
-        setDeleteProfile({ error: response.data.message, loading: false });
+        setDeleteStory({ error: response.data.message, loading: false });
         history.push("/login");
       }
     } catch (error: any) {
-      setDeleteProfile({ error: error.message, loading: false });
+      setDeleteStory({ error: error.message, loading: false });
       history.push("/login");
     }
   };
@@ -58,11 +64,11 @@ export default function DeleteProfileModal(props: DeleteProfileModalProps) {
         <Button variant="danger" onClick={handleProfileDeletion}>
           I'm Sure.
         </Button>
-        {deleteProfile.loading ? (
+        {deleteStory.loading ? (
           <Loader />
         ) : (
-          deleteProfile.error && (
-            <Alert variant="danger">{deleteProfile.error}</Alert>
+          deleteStory.error && (
+            <Alert variant="danger">{deleteStory.error}</Alert>
           )
         )}
       </Modal.Footer>
