@@ -6,6 +6,8 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { getMeAction } from "../redux/actions/getMeAction";
 import Loader from "./Loader";
+import { getMyStoriesAction } from "../redux/actions/getMyStoriesAction";
+import { getHeartedStories } from "../redux/actions/getHeartedStories";
 
 interface EditProfileModalProps {
   show: boolean;
@@ -71,6 +73,8 @@ export default function EditProfileModal(props: EditProfileModalProps) {
           if (secondResponse.status === 200) {
             setEdit({ error: "", loading: false });
             dispatch(getMeAction(config, history.push));
+            dispatch(getMyStoriesAction(config));
+            dispatch(getHeartedStories(config));
             props.onHide();
           } else {
             setEdit({ error: firstResponse.data.message, loading: false });

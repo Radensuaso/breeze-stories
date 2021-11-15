@@ -107,14 +107,14 @@ export default function SingleStoryPage() {
               >
                 Comment
               </Button>
-              {submitComment.loading ? (
-                <Loader />
-              ) : (
-                submitComment.error && (
-                  <Alert variant="danger">{submitComment.error}</Alert>
-                )
-              )}
             </Col>
+            {submitComment.loading ? (
+              <Loader />
+            ) : (
+              submitComment.error && (
+                <Alert variant="danger">{submitComment.error}</Alert>
+              )
+            )}
           </Row>
         </Form>
       </Container>
