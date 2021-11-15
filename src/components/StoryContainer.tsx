@@ -71,9 +71,7 @@ export default function StoryContainer({ story }: StoryContainerProps) {
         ))}
       </h5>
       {story?.story && (
-        <div className="mb-4 align-self-start">
-          {ReactHtmlParser(story?.story)}
-        </div>
+        <div className="mb-4">{ReactHtmlParser(story?.story)}</div>
       )}
       <div className="mb-4" style={{ maxHeight: "22rem", maxWidth: "30rem" }}>
         {story?.storyImage && <Image src={story?.storyImage} fluid rounded />}
