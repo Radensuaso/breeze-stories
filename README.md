@@ -20,4 +20,5 @@ Back-end
 
 ## Launch
 
-This app can be found in https://breeze-stories.vercel.app/. Hope you enjoy.
+This app can be found in https://breeze-stories.onrender.com
+Hope you enjoy.
