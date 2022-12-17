@@ -16,28 +16,28 @@ import { commentReducer } from "./commentReducer";
 import { authorizationHeaderReducer } from "./authorizationHeaderReducer";
 
 const persistConfig = {
-  key: "root",
-  storage,
-  transforms: [
-    encryptTransform({
-      secretKey: process.env.REACT_APP_ENCRYPTED_PERSIST_KEY!,
-    }),
-  ],
+    key: "root",
+    storage,
+    transforms: [
+        encryptTransform({
+            secretKey: process.env.REACT_APP_ENCRYPTED_PERSIST_KEY!,
+        }),
+    ],
 };
 
 const reducer = combineReducers({
-  me: meReducer,
-  authors: authorsReducer,
-  author: authorReducer,
-  stories: storiesReducer,
-  myStories: myStoriesReducer,
-  heartedStories: heartedStoriesReducer,
-  authorStories: authorStoriesReducer,
-  randomStory: randomStoryReducer,
-  story: storyReducer,
-  comments: commentsReducer,
-  comment: commentReducer,
-  authorizationHeader: authorizationHeaderReducer,
+    me: meReducer,
+    authors: authorsReducer,
+    author: authorReducer,
+    stories: storiesReducer,
+    myStories: myStoriesReducer,
+    heartedStories: heartedStoriesReducer,
+    authorStories: authorStoriesReducer,
+    randomStory: randomStoryReducer,
+    story: storyReducer,
+    comments: commentsReducer,
+    comment: commentReducer,
+    authorizationHeader: authorizationHeaderReducer,
 });
 
 const persistingReducer = persistReducer(persistConfig, reducer);

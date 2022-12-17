@@ -14,30 +14,28 @@ import SingleAuthorPage from "./pages/SingleAuthorPage";
 import SingleStoryPage from "./pages/SingleStoryPage";
 
 export default function App() {
-  return (
-    <Router>
-      <div className="App">
-        <BreezeNavBar />
-        <Container id="main-container">
-          <Route path="/" exact component={HomePage} />
-          <Route path="/me" exact component={MePage} />
-          <Route path="/authors" exact component={AuthorsPage} />
-          <Route path="/postStory" exact component={PostUpdateStoryPage} />
-          <Route path="/random" exact component={RandomStoryPage} />
-          <Route path="/register" exact component={RegisterPage} />
-          <Route path="/login" exact component={LoginPage} />
-          <Route
-            path="/singleAuthor/:authorId"
-            exact
-            component={SingleAuthorPage}
-          />
-          <Route
-            path="/singleStory/:storyId"
-            exact
-            component={SingleStoryPage}
-          />
-        </Container>
-      </div>
-    </Router>
-  );
+    return (
+        <Router>
+            <div className="App">
+                <BreezeNavBar />
+                <Container id="main-container">
+                    <Route path="/" exact component={HomePage} />
+                    <Route path="/me" exact component={MePage} />
+                    <Route path="/authors" exact component={AuthorsPage} />
+                    <Route path="/postStory" exact component={PostUpdateStoryPage} />
+                    <Route path="/random" exact component={RandomStoryPage} />
+                    <Route path="/register" exact component={RegisterPage} />
+                    <Route path="/login" exact component={LoginPage} />
+                    <Route
+                        path="/singleAuthor/:authorId"
+                        exact
+                        component={SingleAuthorPage} />
+                    <Route
+                        path="/singleStory/:storyId"
+                        exact
+                        component={SingleStoryPage} />
+                </Container>
+            </div>
+        </Router>
+    );
 }
